@@ -148,6 +148,26 @@ class Manifest(object):
                 raise ItemDoesntExistException()
         self.items_rdfobjects[s].add_triple(p,o)
 
+    def triple_exists(self, s, p, o):
+        if s and s != "*":
+            s_uri = self.uh.parse_uri(s)
+            if s_uri in self.items_rdfobjects:
+                return self.items_rdfobjects[s_uri].triple_exists(p,o)
+        return False
+
+    def list_objects(self, s, p):
+        if s == "*":
+            construct = {}
+            for s_uri in self.items_rdfobjects.keys():
+                objs = self.items_rdfobjects[s_uri].list_objects(p)
+                if objs:
+                    construct[s_uri] = objs
+            return construct
+        s_uri = self.uh.parse_uri(s)
+        if s_uri in self.items_rdfobjects:
+            return self.items_rdfobjects[s_uri].list_objects(p)
+        return []
+
     @_altered_flag
     def del_triple(self, s, p, o=None):
         """ NB To delete all of a certain property (p) in a given item (s), do not set (o)"""

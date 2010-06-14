@@ -93,6 +93,16 @@ class RDFobject(object):
         if prefix in self.namespaces:
             del self.namespaces[prefix]
 
+    def triple_exists(self, predicate, objectRef):
+        if not isinstance(objectRef, URIRef) and not isinstance(objectRef, Literal):
+            objectRef = self.urihelper.parse_uri(objectRef, return_Literal_not_Exception=True)
+        predicate_uri = self.urihelper.parse_uri(predicate)
+        return (predicate_uri, objectRef) in self.triples
+
+    def list_objects(self, predicate):
+        predicate_uri = self.urihelper.parse_uri(predicate)
+        return [x[1] for x in self.triples if x[0] == predicate_uri]
+
     @_cause_new_revision    
     def add_triple(self, predicate, objectRef):
         if not isinstance(objectRef, URIRef) and not isinstance(objectRef, Literal):

@@ -3,7 +3,7 @@ use_setuptools()
 from setuptools import setup, find_packages
 
 setup(name="RDFobject",
-      version="0.3.8",
+      version="0.4.1",
       description="RDFobject - classes for dealing with entities and things in RDF",
       long_description="""\
 RDFobject - a set of python classes to make it easy to deal with RDF concerning entities or things.
