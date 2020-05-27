@@ -13,6 +13,6 @@ fedora-commons model that objects have attached 'parts' - files, metadata, etc.
       author="Ben O'Steen",
       author_email="bosteen@gmail.com",
       packages=find_packages(exclude='tests'),
-      install_requires=['rdflib>=2.4.2', 'simplejson', 'httplib2==0.5.0', 'pairtree>=0.4'],
+      install_requires=['rdflib>=2.4.2', 'simplejson', 'httplib2==0.18.0', 'pairtree>=0.4'],
       )
 
